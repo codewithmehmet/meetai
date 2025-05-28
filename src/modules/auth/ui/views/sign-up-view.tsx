@@ -1,11 +1,7 @@
 "use client";
-import { z } from "zod";
-import { useForm } from "react-hook-form";
-import { OctagonAlertIcon } from "lucide-react";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Input } from "@/components/ui/input";
 import { Alert, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 import {
   Form,
   FormControl,
@@ -14,12 +10,16 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Card, CardContent } from "@/components/ui/card";
-import Link from "next/link";
+import { Input } from "@/components/ui/input";
 import { authClient } from "@/lib/auth-client";
-import { useState } from "react";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { OctagonAlertIcon } from "lucide-react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
 import { FaGithub, FaGoogle } from "react-icons/fa";
+import { z } from "zod";
 
 const formSchema = z
   .object({
@@ -209,7 +209,7 @@ export const SignUpView = () => {
                     type="button"
                     className="w-full"
                   >
-                    <FaGoogle />
+                    <FaGoogle /> Google
                   </Button>
                   <Button
                     disabled={pending}
@@ -218,7 +218,7 @@ export const SignUpView = () => {
                     type="button"
                     className="w-full"
                   >
-                    <FaGithub />
+                    <FaGithub /> Github
                   </Button>
                 </div>
                 <div className="text-center text-sm">

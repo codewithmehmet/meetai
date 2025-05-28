@@ -156,7 +156,7 @@ export const SignInView = () => {
                     type="button"
                     className="w-full"
                   >
-                    <FaGoogle />
+                    <FaGoogle /> Google
                   </Button>
                   <Button
                     disabled={pending}
@@ -165,7 +165,7 @@ export const SignInView = () => {
                     type="button"
                     className="w-full"
                   >
-                    <FaGithub />
+                    <FaGithub /> Github
                   </Button>
                 </div>
                 <div className="text-center text-sm">
