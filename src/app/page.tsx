@@ -1,10 +1,5 @@
-import { Button } from "@/components/ui/button";
+import { HomeView } from "@/modules/home/ui/views/home-view";
 
-export default function Home() {
-  return (
-    <div className="text-4xl text-green-500 font-bold">
-      Hello World!
-      <Button>Click me</Button>
-    </div>
-  );
+export default function Page() {
+  return <HomeView />;
 }
