@@ -1,15 +1,10 @@
 "use client";
 
-import { useTRPC } from "@/trpc/client";
-import { useQuery } from "@tanstack/react-query";
-
 export const HomeView = () => {
-  const trpc = useTRPC();
-  const { data } = useQuery(trpc.hello.queryOptions({ text: "Mehmet" }));
-  console.log(data);
   return (
-    <div className="p-4 flex flex-col gap-y-4">
-      <h1>{data?.greeting}</h1>
+    <div className="p-4">
+      <h1>Home view</h1>
+      {/* Add your home page content here */}
     </div>
   );
 };
