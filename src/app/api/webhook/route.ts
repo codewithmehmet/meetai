@@ -1,5 +1,6 @@
 import { db } from "@/db";
 import { agents, meetings } from "@/db/schema";
+import { inngest } from "@/inngest/client";
 import { streamVideo } from "@/lib/stream-video";
 import {
   CallEndedEvent,
@@ -117,7 +118,7 @@ export async function POST(req: NextRequest) {
         endedAt: new Date(),
       })
       .where(and(eq(meetings.id, meetingId), eq(meetings.status, "active")));
-  } else if (eventType === "call.transcription.ready") {
+  } else if (eventType === "call.transcription_ready") {
     const event = payload as CallTranscriptionReadyEvent;
     const meetingId = event.call_cid.split(":")[1]; //call_cid is formatted as "type:id"
     const [updatedMeeting] = await db
@@ -130,7 +131,14 @@ export async function POST(req: NextRequest) {
     if (!updatedMeeting) {
       return NextResponse.json({ error: "Meeting not found" }, { status: 404 });
     }
-  } else if (eventType === "call.recording.ready") {
+    await inngest.send({
+      name: "meetings/processing",
+      data: {
+        meetingId: updatedMeeting.id,
+        transcriptUrl: updatedMeeting.transcriptUrl,
+      },
+    });
+  } else if (eventType === "call.recording_ready") {
     const event = payload as CallRecordingReadyEvent;
     const meetingId = event.call_cid.split(":")[1]; //call_cid is formatted as "type:id"
     await db
